@@ -42,6 +42,9 @@ const App = () => {
     background-color: ${(props) => (props.success ? "green" : "red")};
   `;
 
+  // command + click allows you to quickly access code snippet details.
+  // styled components is a prodcutivity booster. Allows styling conditioanls and is much cleaner code than grabbing classes and id's.
+
   return (
     <Container>
       <Title>Timer: {initialTime}</Title>
@@ -51,6 +54,7 @@ const App = () => {
       <Button danger onClick={handleReset}>
         Reset
       </Button>
+      <Button>Record</Button>
     </Container>
   );
 };
