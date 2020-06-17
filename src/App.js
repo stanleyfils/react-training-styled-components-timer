@@ -6,7 +6,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  color: gray;
+  color: ${(props) => props.theme.darkGray};
 `;
 
 const App = () => {
