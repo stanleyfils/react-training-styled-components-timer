@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  border: 1px solid red;
+  border: ${({ theme }) => `3px solid ${theme.darkerGray}`};
+  width: 200px;
+  height: 100px;
+  margin: 0 auto;
 `;
 
+// since App.js is a child of Theme, App.js (and anything else wrapped in between Theme in index.js) has access to ThemeProvider (context)
 const Title = styled.h1`
   color: ${(props) => props.theme.darkGray};
 `;
@@ -54,7 +58,8 @@ const App = () => {
       <Button danger onClick={handleReset}>
         Reset
       </Button>
-      <Button>Record</Button>
+      {/* this conditional sets the record feature to the record button. Consider DOM reconiliation. Setting else conditional to null removes the record button when not an option in order to give React less html elements to map through */}
+      {isActive && initialTime !== 0 ? <Button>Record</Button> : null}
     </Container>
   );
 };
