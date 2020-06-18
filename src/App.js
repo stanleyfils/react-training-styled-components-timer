@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+// you can nest regular CSS classes inside of styled components! When using styled components, you don't have to make every component a styled component. You have options!
 const Container = styled.div`
   border: ${({ theme }) => `3px solid ${theme.darkerGray}`};
   width: 200px;
-  height: 100px;
+  height: 120px;
   margin: 0 auto;
+
+  .race {
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  /* Example of nesting CSS classes. This is the same as using the Title styled-component. */
+  /* h1 {
+    color: ${(props) => props.theme.darkGray};
+  } */
 `;
 
 // since App.js is a child of Theme, App.js (and anything else wrapped in between Theme in index.js) has access to ThemeProvider (context)
@@ -52,6 +64,7 @@ const App = () => {
   return (
     <Container>
       <Title>Timer: {initialTime}</Title>
+      <div className="race">Ready, Set, Go!</div>
       <Button success onClick={() => setIsActive((prev) => !prev)}>
         {isActive ? "Pause" : "Start"}
       </Button>
