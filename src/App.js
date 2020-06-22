@@ -28,6 +28,7 @@ const Title = styled.h1`
 const App = () => {
   const [isActive, setIsActive] = useState(false);
   const [initialTime, setInitialTime] = useState(0);
+  const [times, setTimes] = useState([]);
 
   // useEffect is a hook for encapsulating code that has 'side effects,' and is like a combination of componentDidMount , componentDidUpdate , and componentWillUnmount. Previously, functional components didn't have access to the component life cycle, but with useEffect you can tap into it. The Effect Hook lets you perform side effects in function components.
 
@@ -61,6 +62,10 @@ const App = () => {
   // command + click allows you to quickly access code snippet details.
   // styled components is a prodcutivity booster. Allows styling conditioanls and is much cleaner code than grabbing classes and id's.
 
+  const handleRecord = () => {
+    setTimes((prev) => [...prev, initialTime]);
+  };
+
   return (
     <Container>
       <Title>Timer: {initialTime}</Title>
@@ -72,7 +77,16 @@ const App = () => {
         Reset
       </Button>
       {/* this conditional sets the record feature to the record button. Consider DOM reconiliation. Setting else conditional to null removes the record button when not an option in order to give React less html elements to map through */}
-      {isActive && initialTime !== 0 ? <Button>Record</Button> : null}
+      {isActive && initialTime !== 0 ? (
+        <Button onClick={handleRecord}>Record</Button>
+      ) : null}
+      {times.length > 0 ? (
+        <ul>
+          {times.map((time) => (
+            <li>{time}</li>
+          ))}
+        </ul>
+      ) : null}
     </Container>
   );
 };
