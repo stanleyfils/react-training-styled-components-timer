@@ -25,6 +25,11 @@ const Title = styled.h1`
   color: ${(props) => props.theme.darkGray};
 `;
 
+// this List feature displays recorded numbers in eithr red or blue depending on whether or not the number recorded is devisible by 2.
+const List = styled.li`
+  color: ${(props) => (props.time % 2 === 0 ? "red" : "blue")};
+`;
+
 const App = () => {
   const [isActive, setIsActive] = useState(false);
   const [initialTime, setInitialTime] = useState(0);
@@ -59,12 +64,12 @@ const App = () => {
     background-color: ${(props) => (props.success ? "green" : "red")};
   `;
 
-  // command + click allows you to quickly access code snippet details.
-  // styled components is a prodcutivity booster. Allows styling conditioanls and is much cleaner code than grabbing classes and id's.
-
   const handleRecord = () => {
     setTimes((prev) => [...prev, initialTime]);
   };
+
+  // command + click allows you to quickly access code snippet details.
+  // styled components is a prodcutivity booster. Allows styling conditionals and is much cleaner code than grabbing classes and id's.
 
   return (
     <Container>
@@ -77,13 +82,13 @@ const App = () => {
         Reset
       </Button>
       {/* this conditional sets the record feature to the record button. Consider DOM reconiliation. Setting else conditional to null removes the record button when not an option in order to give React less html elements to map through */}
-      {isActive && initialTime !== 0 ? (
+      {!isActive && initialTime !== 0 ? (
         <Button onClick={handleRecord}>Record</Button>
       ) : null}
       {times.length > 0 ? (
         <ul>
           {times.map((time) => (
-            <li>{time}</li>
+            <List time={time}>{time}</List>
           ))}
         </ul>
       ) : null}
